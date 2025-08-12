@@ -48,7 +48,7 @@ def new_site():
 
     # Build site payload
 
-    payload = {
+    api_data = {
         "name": "rick-test222",
         "city": "Gilbert",
         "state": "Arizona",
@@ -68,7 +68,7 @@ def new_site():
 
     api_path="network-config/v1alpha1/sites"
 
-    new_site = api_caller(client,api_method,api_path,payload)
+    new_site = api_caller(client,api_method,api_path,api_data)
 
     print(new_site)
 
