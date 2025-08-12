@@ -19,6 +19,6 @@ put_site_by_name.py - Update any key/value pair in the site information. HTTP PU
 
 ### Simplified access
 
-utility.get_client - returns the client (TOKEN)
+utility.get_client.py - returns the client (TOKEN)
 
 utility.api_caller.py - Send client, api_method, api_path, and api_data
