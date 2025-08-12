@@ -40,30 +40,38 @@ __status__ = "Alpha"
 '''
 import requests
 from pycentral import NewCentralBase
-from utility.token_info import token_info
+from utility.get_client_api import get_client
+from utility.api_caller import api_caller
 import json
 
-def devices():
+def delete_site():
 
-    client = NewCentralBase(
-                token_info=token_info,
-                )
+    name = "rick-test222"
 
-    # Get devices with New Central API
-    response2 = client.command(
-            api_method="GET", api_path="network-monitoring/v1alpha1/devices"
-            )
-    print('got new devices')
-    devices = response2['msg']['items']
+    client = get_client()
 
-    # Returns a python list of devices
-    # return devices
+    api_method = "GET"
 
-    for d in devices:
-        print('__________________________________________________________________')
-        print(d)
+    api_path="network-config/v1alpha1/sites"
+
+    site_list = api_caller(client,api_method,api_path)
+
+    # Find scopeId by __name__
+    for s in site_list:
+        if s['scopeName'] == name:
+            print(f"this is the site name: {s['scopeName']} and this is the scopeId: {s['scopeId']}")
+            scopeId = s['scopeId']
+
+    api_data = {
+        "scopeId": scopeId
+    }
+
+    api_method = "DELETE"
+    response = api_caller(client,api_method,api_path,api_data)
+
+    print(response)
 
 
 
 if __name__ == '__main__':
-    devices()
+    delete_site()

@@ -43,27 +43,9 @@ from pycentral import NewCentralBase
 from utility.token_info import token_info
 import json
 
-def devices():
+def get_client():
 
     client = NewCentralBase(
                 token_info=token_info,
                 )
-
-    # Get devices with New Central API
-    response2 = client.command(
-            api_method="GET", api_path="network-monitoring/v1alpha1/devices"
-            )
-    print('got new devices')
-    devices = response2['msg']['items']
-
-    # Returns a python list of devices
-    # return devices
-
-    for d in devices:
-        print('__________________________________________________________________')
-        print(d)
-
-
-
-if __name__ == '__main__':
-    devices()
+    return client

@@ -38,32 +38,20 @@ __email__ = "rick@rickkauffman.com"
 __status__ = "Alpha"
 
 '''
-import requests
 from pycentral import NewCentralBase
-from utility.token_info import token_info
-import json
 
-def devices():
+def api_caller(client, api_method, api_path, api_data=None):
 
-    client = NewCentralBase(
-                token_info=token_info,
-                )
+    if api_data == None:
 
-    # Get devices with New Central API
-    response2 = client.command(
-            api_method="GET", api_path="network-monitoring/v1alpha1/devices"
-            )
-    print('got new devices')
-    devices = response2['msg']['items']
+        # Get api
+        response = client.command(api_method=api_method, api_path=api_path)
+        results = response['msg']['items']
 
-    # Returns a python list of devices
-    # return devices
+    else:
 
-    for d in devices:
-        print('__________________________________________________________________')
-        print(d)
+        #Process api_data - payload
+        response = client.command(api_method=api_method, api_path=api_path, api_data=api_data)    
+        results = response['msg']['items']
 
-
-
-if __name__ == '__main__':
-    devices()
+    return results

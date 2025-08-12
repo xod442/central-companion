@@ -40,30 +40,27 @@ __status__ = "Alpha"
 '''
 import requests
 from pycentral import NewCentralBase
-from utility.token_info import token_info
+from utility.get_client_api import get_client
+from utility.api_caller import api_caller
 import json
 
-def devices():
+def get_sites():
 
-    client = NewCentralBase(
-                token_info=token_info,
-                )
+    client = get_client()
 
-    # Get devices with New Central API
-    response2 = client.command(
-            api_method="GET", api_path="network-monitoring/v1alpha1/devices"
-            )
-    print('got new devices')
-    devices = response2['msg']['items']
+    api_method = "GET"
 
-    # Returns a python list of devices
-    # return devices
+    api_path="network-config/v1alpha1/sites"
 
-    for d in devices:
+    sites = api_caller(client,api_method,api_path)
+
+    for s in sites:
         print('__________________________________________________________________')
-        print(d)
+        print(s)
+
+    print('Complete')
 
 
 
 if __name__ == '__main__':
-    devices()
+    get_sites()
