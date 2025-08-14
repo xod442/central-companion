@@ -45,6 +45,8 @@ import json
 
 def get_client():
 
+    print(f"This is the token_info: {token_info}")
+
     client = NewCentralBase(
                 token_info=token_info,
                 )
